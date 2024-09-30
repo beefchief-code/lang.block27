@@ -2,10 +2,11 @@ import { useState } from "react";
 const API = "https://fsa-jwt-practice.herokuapp.com/signup/";
 
 export default function SignUpForm({ setToken }) {
-  //state vars for user, password, error
+  //state vars for user, password, error, status message
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [status, setStatus] = useState("Please register for an account");
 
   async function handleSubmit(event) {
     //prevent refresh
@@ -19,7 +20,9 @@ export default function SignUpForm({ setToken }) {
         body: JSON.stringify({ username, password }),
       });
       const result = await response.json();
+      //send api info to state
       setToken(result.token);
+      setStatus(result.message);
       console.log(result);
     } catch (error) {
       setError(error.message);
@@ -30,6 +33,7 @@ export default function SignUpForm({ setToken }) {
   return (
     <>
       <h2>Sign Up</h2>
+      <p>{status}</p>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <label>

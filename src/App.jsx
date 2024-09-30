@@ -3,11 +3,10 @@ import Authenticate from "./components/Authenticate";
 import SignUpForm from "./components/SignUpForm";
 import "./App.css";
 
-const API = "https://fsa-jwt-practice.herokuapp.com/signup/";
-
 function App() {
   //state token vars
   const [token, setToken] = useState("");
+  //pass token to components, call functions, display on page
   return (
     <>
       <SignUpForm token={token} setToken={setToken} />
